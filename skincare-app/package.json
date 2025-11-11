@@ -1,0 +1,21 @@
+{
+  "name": "skincare-app-workspace",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -n frontend,backend,ready -c green,blue,magenta \"npm:dev:frontend\" \"npm:dev:backend\" \"npm:dev:ready\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:ready": "wait-on -s 60s http-get://localhost:5174 http-get://localhost:3001/health && node -e \"console.log('=============================\\n✅ Ứng dụng đã sẵn sàng\\n- Frontend: http://localhost:5174/\\n- Backend:  http://localhost:3001/health\\n=============================')\"",
+    "build": "cd frontend && npm run build",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "wait-on": "^6.0.1"
+  },
+  "dependencies": {
+    "react-router-dom": "^7.9.1"
+  }
+}
